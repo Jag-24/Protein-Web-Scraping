@@ -1,15 +1,15 @@
 from bs4 import BeautifulSoup
-import pandas as pd
-from urllib.request import urlopen
+import requests
 
 products = []
 prices = []
 proteins =[]
 
-url = "https://en.wikipedia.org/wiki/Python_(programming_language)"
-page = urlopen(url)
-html = page.read().decode("utf-8")
-soup = BeautifulSoup(html, "html.parser")
+url = "https://www.walmart.ca/en/ip/high-whey/6000202080561"
+headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"}
+html = requests.get(url, headers = headers)
 
-print(soup.find("h1", class_ ="css-1c6krh5 e1yn5b3f9"))
-print(soup.find('title').text)
+soup = BeautifulSoup(html.text, features='html.parser')
+product_name = soup.find('h1', attrs={'data-automation': 'product-title'}).text
+
+print(product_name)
