@@ -1,23 +1,17 @@
-from selenium import webdriver
 from bs4 import BeautifulSoup
-import pandas as pd
-
-driver = webdriver.Safari()
+import requests
 
 products = []
 prices = []
 proteins =[]
-driver.get("https://www.walmart.ca/en/ip/high-whey/6000202080561")
 
-content = driver.page_source
-soup = BeautifulSoup(content)
-for a in soup.findAll('a', href=True, attrs={'class':'js-content'}):
-    price = a.find('div', attrs={'class':'css-2vqe5n esdkp3p0'})
-    name = a.find('div', attrs={'class':'css-jl2ki2 e1yn5b3f3'})
-    #amount = a.find('div', attrs={'class':''})
+url = "https://www.walmart.ca/en/ip/high-whey/6000202080561"
+headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"}
+html = requests.get(url, headers = headers)
 
-    products.append(name.text)
-    prices.append(price.text)
+soup = BeautifulSoup(html.text, features='html.parser')
+product_name = soup.find('h1', attrs={'data-automation':'product-title'}).text
+product_price = soup.find('span', attrs={'data-automation':'buybox-price'})
 
-df = pd.DataFrame({'Name':products,'Price':prices})
-df.to_csv('products.csv', index=False, encoding='utf-8')
+print(product_name)
+print(product_price)
