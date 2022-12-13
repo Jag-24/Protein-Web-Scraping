@@ -13,6 +13,8 @@ html = requests.get(url, headers = headers)
 soup = BeautifulSoup(html.text, features='html.parser')
 product_name = soup.find('h1', attrs={'data-automation':'product-title'}).text
 product_price = soup.find('span', attrs={'data-automation':'buybox-price'})
+#Test_Desc = soup.find('h1', attrs={'data-automation':'product-title'}).text
 
 print(product_name)
-print(product_price)
+#print(product_price)
+#print(Test_Desc)
