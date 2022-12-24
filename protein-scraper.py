@@ -1,8 +1,8 @@
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from Product import Product
+import pandas as pd
 import time
 
 start_time = time.time()
