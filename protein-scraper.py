@@ -29,10 +29,14 @@ URLS = ["https://www.walmart.ca/en/ip/high-whey/6000202080561",
 
 Protein = [25,9,28,4,4,3,27,6]
 
-for x,y in zip(URLS,Protein):
-    p = extract_data(x,y)
-    print(p.name)
-    print(p.price)
-    print(p.protein)
+data = ({"Name": [], "Price": [], "Protein": []})
+df = pd.DataFrame(data)
 
+for x,y in zip(URLS,Protein):
+    print("Currently working on: " + x)
+    p = extract_data(x,y)
+    new_row = pd.DataFrame({"Name":p.name, "Price":p.price, "Protein":p.protein}, index =[0])
+    df = pd.concat([new_row,df.loc[:]]).reset_index(drop=True)
+
+print(df)
 print("---%s seconds ---" % (time.time() - start_time))
