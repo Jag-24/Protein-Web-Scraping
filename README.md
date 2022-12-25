@@ -1,3 +1,13 @@
 # Protein Web Scraping
+ A simple python script that scrapes Walmart.ca for the price and name of an item given the URL and the associated protein per serving of the food in question.
  
- A simple script that scrapes grocery websites (mainly Walmart) to recover data such as Name, Price, and Nutritional Info
+# Dependancies
+ Requires Selenium, pandas along with the provided Product class
+ 
+#Use
+ Is to be used straight from the terminal 
+ 
+#Planned updates
+ Will upgrade the script to include pytesseract support to allow the reading of nutritional images to determine protein per serving along with additional info such as serving size and other macronutrients that may be of interest on a user-to-user basis.
+ 
+ 
